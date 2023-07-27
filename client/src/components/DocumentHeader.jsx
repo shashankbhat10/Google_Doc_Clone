@@ -1,11 +1,13 @@
-import { firestore } from "../firebase";
+import { firestore, auth } from "../firebase";
 import { Button, IconButton, Input, Popover, PopoverContent, PopoverHandler, Tooltip } from "@material-tailwind/react";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { signOut } from "firebase/auth";
 import { RiLock2Line, RiShareFill } from "react-icons/ri";
 import { useNavigate, useParams } from "react-router-dom";
+// import { Popover, Transition } from "@headlessui/react";
+import axios from "axios";
 
 function DocumentHeader({ isDocLocked, isOwner, updateIsDocLocked, documentLockHandler }) {
   const { user } = useContext(AuthContext);
@@ -13,6 +15,7 @@ function DocumentHeader({ isDocLocked, isOwner, updateIsDocLocked, documentLockH
   const [newDocumentName, updateNewDocumentName] = useState("");
   const [emailToShare, updateEmailToShare] = useState("");
   const [showPopover, updateShowPopover] = useState(false);
+  // const shareButtonRef = useRef(null);
 
   const { id: documentId } = useParams();
 
@@ -42,10 +45,20 @@ function DocumentHeader({ isDocLocked, isOwner, updateIsDocLocked, documentLockH
     updateNewDocumentName(documentName);
   };
 
-  const addEmailToAllowedList = async () => {
+  const addEmailToAllowedList = async (event) => {
     console.log("ADD EMAIL");
+    const token = await auth.currentUser.getIdToken();
     const documentRef = doc(firestore, "document", documentId);
     await updateDoc(documentRef, { allowed: arrayUnion(emailToShare) });
+
+    const emailData = {
+      token: token,
+      emailTo: emailToShare,
+      documentName: newDocumentName,
+      documentId: documentId,
+    };
+    const res = await axios.post("http://localhost:8000/sendmail", emailData);
+
     updateEmailToShare("");
   };
 
@@ -66,7 +79,7 @@ function DocumentHeader({ isDocLocked, isOwner, updateIsDocLocked, documentLockH
           value={newDocumentName}
           onChange={(e) => updateNewDocumentName(e.target.value)}
           placeholder='Document Name'
-          className='flex-grow px-2 md:px-5 pb-2 justify-center bg-transparent outline-none'
+          className='flex-grow px-2 md:px-5 pb-2 justify-center bg-transparent outline-none text-center'
           onKeyDown={(e) => e.key === "Enter" && updateDocumentNameHandler()}
           onBlur={resetNewDocumentName}
         />
@@ -90,10 +103,10 @@ function DocumentHeader({ isDocLocked, isOwner, updateIsDocLocked, documentLockH
           </IconButton>
         </Tooltip>
 
-        {console.log(showPopover)}
         <Popover placement='bottom-end'>
           <PopoverHandler>
             <Button
+              // ref={(elem) => (shareButtonRef = elem)}
               className='w-fit h-10 mr-7 py-2'
               color='blue'
               ripple
@@ -119,7 +132,7 @@ function DocumentHeader({ isDocLocked, isOwner, updateIsDocLocked, documentLockH
               value={emailToShare}
               onChange={(e) => updateEmailToShare(e.target.value)}
             />
-            <Button className='py-2 px-4' disabled={emailToShare === ""} onClick={() => addEmailToAllowedList()}>
+            <Button className='py-2 px-4' disabled={emailToShare === ""} onClick={(e) => addEmailToAllowedList(e)}>
               <RiShareFill className='text-xl' />
             </Button>
           </PopoverContent>
