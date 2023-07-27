@@ -8,7 +8,7 @@ dotenv.config();
 /**
  * Create socket instance
  */
-const io = require("socket.io")(3001, {
+const io = require("socket.io")(process.env.SOCKET_PORT, {
   cors: { origin: "http://localhost:3000", methods: ["GET", "POST"] },
 });
 
@@ -113,6 +113,6 @@ app.post("/sendmail", async (req, res) => {
   res.status(200).json({ message: "Email sent!" });
 });
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.SERVER_PORT || 8000;
 
 app.listen(PORT, console.log(`API server started. Listening on port: ${PORT}`));
