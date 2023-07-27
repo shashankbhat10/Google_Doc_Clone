@@ -49,7 +49,7 @@ const transporter = nodemailer.createTransport({
   // host: "smtp.gmail.com",
   auth: {
     user: "s.2205.b@gmail.com",
-    pass: "fhdztwjangseqith",
+    pass: process.env.APP_PASS,
   },
   secure: false,
   tls: {
@@ -60,14 +60,14 @@ const transporter = nodemailer.createTransport({
 /**
  * Test route
  */
-app.get("/", (req, res) => {
+app.get("/api/", (req, res) => {
   console.log("Hello World!");
 });
 
 /**
  * Route to handle sending emails
  */
-app.post("/sendmail", async (req, res) => {
+app.post("/api/sendmail", async (req, res) => {
   const { token, emailTo, documentName, documentId } = req.body;
 
   try {
@@ -113,6 +113,6 @@ app.post("/sendmail", async (req, res) => {
   res.status(200).json({ message: "Email sent!" });
 });
 
-const PORT = process.env.SERVER_PORT || 8000;
+const PORT = process.env.SERVER_PORT || 8002;
 
 app.listen(PORT, console.log(`API server started. Listening on port: ${PORT}`));
