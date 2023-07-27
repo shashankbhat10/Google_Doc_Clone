@@ -1,6 +1,6 @@
 import { IconButton } from "@material-tailwind/react";
 import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth } from "../firebase-client";
 // import { signOut, useSession } from "next-auth/react";
 
 function Header({ image }) {

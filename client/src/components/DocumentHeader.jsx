@@ -1,4 +1,4 @@
-import { firestore, auth } from "../firebase";
+import { firestore, auth } from "../firebase-client";
 import { Button, IconButton, Input, Popover, PopoverContent, PopoverHandler, Tooltip } from "@material-tailwind/react";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import { Fragment, useContext, useEffect, useRef, useState } from "react";

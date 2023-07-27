@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
-import { firestore } from "../firebase";
+import { firestore } from "../firebase-client";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { IconButton } from "@material-tailwind/react";

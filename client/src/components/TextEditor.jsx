@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import "quill/dist/quill.snow.css";
 import { useParams } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { firestore } from "../firebase";
+import { firestore } from "../firebase-client";
 import { AuthContext } from "../provider/AuthProvider";
 import NotAllowedModal from "./NotAllowedModal";
 import Loader from "./Loader";
@@ -149,6 +149,9 @@ export default function TextEditor({ updateIsOwner, isDocLocked }) {
     if (quill === null || socket === null) return;
 
     if (isDocLocked) {
+      const mainDocument = document.getElementsByClassName("ql-container ql-snow");
+      console.log(mainDocument[0].outerHTML);
+      // console.log(quill.root.innerHTML);
       quill.disable();
     } else {
       quill.enable();

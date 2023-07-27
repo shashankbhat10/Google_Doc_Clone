@@ -3,7 +3,7 @@ import DocumentHeader from "../components/DocumentHeader";
 import TextEditor from "../components/TextEditor";
 import { useParams } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
-import { firestore } from "../firebase";
+import { firestore } from "../firebase-client";
 
 const Document = () => {
   const [isDocLocked, updateIsDocLocked] = useState(false);

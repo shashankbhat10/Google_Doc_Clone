@@ -1,5 +1,5 @@
 import { Button } from "@material-tailwind/react";
-import { auth, googleProvider } from "../firebase";
+import { auth, googleProvider } from "../firebase-client";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
