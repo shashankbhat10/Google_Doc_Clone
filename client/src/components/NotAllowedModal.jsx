@@ -41,38 +41,11 @@ const NotAllowedModal = () => {
                   </Dialog.Title>
                   <div className='mt-2'>
                     <p className='text-sm text-gray-500'>
-                      {/* Your payment has been successfully submitted. We’ve sent you an email with all of the details of
-                  your order. */}
                       The owner of this document has not given you access to view or edit this document.
                     </p>
                   </div>
 
-                  {/* <input
-                value={newDocumentName}
-                onChange={(e) => updateNewDocumentName(e.target.value)}
-                type='text'
-                placeholder='Enter name for new document'
-                className='outline-none w-full'
-                // onKeyDown={(e) => e.key === "Enter" && createNewDocument()}
-              /> */}
-
                   <div className='mt-2 flex justify-end'>
-                    {/* <button
-                  type='button'
-                  className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
-                  onClick={closeModal}>
-                  Got it, thanks!
-                </button> */}
-
-                    {/* <Button
-                  className='mr-2 p-2 border-0'
-                  ripple={true}
-                  color='blue'
-                  variant='outlined'
-                  onClick={() => closeModal()}>
-                  Cancel
-                </Button> */}
-
                     <Button className='p-2' ripple={true} color='blue' onClick={() => redirectToHome()}>
                       Go to Home
                     </Button>

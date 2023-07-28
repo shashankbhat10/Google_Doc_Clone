@@ -1,12 +1,8 @@
 import { IconButton } from "@material-tailwind/react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase-client";
-// import { signOut, useSession } from "next-auth/react";
 
 function Header({ image }) {
-  //   const { data: session } = useSession();
-  // console.log(image);
-
   return (
     <header className='sticky top-0 z-50 flex items-center px-4 py-2 shadow-md bg-white'>
       {/* <IconButton
@@ -35,7 +31,6 @@ function Header({ image }) {
       <img
         loading='lazy'
         className='h-10 w-10 md:h-12 md:w-12 rounded-full hover:cursor-pointer'
-        // src='./images/maxresdefault.jpg'
         src={image}
         alt='profile'
         onClick={() => signOut()}

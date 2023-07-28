@@ -36,7 +36,6 @@ function DocumentHeader({ isDocLocked, isOwner, updateIsDocLocked, documentLockH
   }, [documentId]);
 
   const updateDocumentNameHandler = async (e) => {
-    console.log("HERE");
     const documentRef = doc(firestore, "document", documentId);
     await updateDoc(documentRef, { name: e.target.value });
   };
@@ -46,7 +45,6 @@ function DocumentHeader({ isDocLocked, isOwner, updateIsDocLocked, documentLockH
   };
 
   const addEmailToAllowedList = async (event) => {
-    console.log("ADD EMAIL");
     const token = await auth.currentUser.getIdToken();
     const documentRef = doc(firestore, "document", documentId);
     await updateDoc(documentRef, { allowed: arrayUnion(emailToShare) });
