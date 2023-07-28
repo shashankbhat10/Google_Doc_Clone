@@ -20,12 +20,12 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 // };
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB1p2f_3juNUEVTfr9Xg_d9tWyi-gnu_YY",
-  authDomain: "doc-clone-2750f.firebaseapp.com",
-  projectId: "doc-clone-2750f",
-  storageBucket: "doc-clone-2750f.appspot.com",
-  messagingSenderId: "465639039510",
-  appId: "1:465639039510:web:969d2d0447b76f1cc48b37",
+  apiKey: process.env.FIREBASE_APIKEY,
+  authDomain: process.env.FIREBASE_AUTHDOMAIN,
+  projectId: process.env.FIREBASE_PROJECTID,
+  storageBucket: process.env.FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.FIREBASE_APPID,
 };
 // Initialize Firebase
 // const app = initializeApp(firebaseConfig);
